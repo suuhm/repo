@@ -2,6 +2,7 @@
 <addon id="plugin.video.7tvneu" name="7TV" version="1.0.1" provider-name="L0RE">
 	<requires>
 		<import addon="xbmc.python" version="2.24.0"/>
+		<import addon="script.module.inputstreamhelper" version="0.3.3"/>
 	</requires>
 	<extension point="xbmc.python.pluginsource" library="default.py">
 		<provides>video</provides>
