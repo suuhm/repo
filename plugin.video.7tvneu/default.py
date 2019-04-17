@@ -427,10 +427,14 @@ def playvideo(video_id, client_location, source_id=None):
 				data = ul
 		except: data = ul
 	userAgent = 'User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'
-	listitem = xbmcgui.ListItem(path=data+"|"+userAgent)
-	listitem.setProperty(INPUTSTREAM+".license_type", "com.widevine.alpha")
-	listitem.setProperty(INPUTSTREAM+".manifest_type", "mpd")
-	listitem.setProperty('inputstreamaddon', INPUTSTREAM)
+	
+	import inputstreamhelper
+        is_helper = inputstreamhelper.Helper('mpd', drm='com.widevine.alpha')
+        if is_helper.check_inputstream():
+		listitem = xbmcgui.ListItem(path=data+"|"+userAgent)
+	    	listitem.setProperty(INPUTSTREAM+".license_type", "com.widevine.alpha")
+		listitem.setProperty(INPUTSTREAM+".manifest_type", "mpd")
+		listitem.setProperty('inputstreamaddon', INPUTSTREAM)
 	try:
 		lic = js3["drm"]["licenseAcquisitionUrl"]
 		token = js3["drm"]["token"]
